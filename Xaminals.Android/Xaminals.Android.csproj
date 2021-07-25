@@ -120,4 +120,9 @@
     <Content Include="obfuscar.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release' ">
+    <Exec WorkingDirectory="$(MonoAndroidIntermediateAssetsDir)" Command="$(Obfuscar) $(ProjectDir)obfuscar.xml" />
+    <Copy SourceFiles="$(TargetDir)Xaminals.Android.dll" DestinationFolder="$(MonoAndroidIntermediateAssetsDir)" />
+    <Copy SourceFiles="$(TargetDir)Xaminals.dll" DestinationFolder="$(MonoAndroidIntermediateAssetsDir)" />
+  </Target>
 </Project>
